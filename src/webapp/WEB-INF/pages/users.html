@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<form method="post" action="/addUser" id="addUserForm"></form>
+<!--<form method="post" action="/deleteUser" id="deleteUserForm"></form>-->
+
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}">ID</td>
+            <td th:utext="${user.getName()}">Name</td>
+            <td th:utext="${user.getEmail()}">Email</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="text" name="name" placeholder="name" form="addUserForm"></td>
+            <td><input type="text" name="email" placeholder="email" form="addUserForm"></td>
+            <td><input type="submit" value="&#10133;" form="addUserForm"></td>
+        </tr>
+    </table>
+
+    <br>
+
+<!--    <form method="post" action="/addUser">-->
+<!--        <label>-->
+<!--            <input type="text" name="name" placeholder="name">-->
+<!--        </label>-->
+<!--        <label>-->
+<!--            <input type="text" name="email" placeholder="email">-->
+<!--        </label>-->
+<!--        <input type="submit" value="Add User">-->
+<!--    </form>-->
+
+<!--    <br>-->
+
+    <form method="post" action="/updateUser">
+        <label>
+            <input type="number" name="id" placeholder="id">
+        </label>
+        <label>
+            <input type="text" name="name" placeholder="name">
+        </label>
+        <label>
+            <input type="text" name="email" placeholder="email">
+        </label>
+        <input type="submit" value="&#128260;">
+    </form>
+
+    <br>
+
+    <form method="post" action="/deleteUser">
+        <label>
+            <input type="number" name="id" placeholder="id">
+        </label>
+        <input type="submit" value="&#10134;">
+    </form>
+</body>
+</html>

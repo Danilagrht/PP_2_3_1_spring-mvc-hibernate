@@ -5,5 +5,11 @@ import web.model.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> getUsers();
+    List<User> getUsers();
+
+    void saveUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(long id);
 }

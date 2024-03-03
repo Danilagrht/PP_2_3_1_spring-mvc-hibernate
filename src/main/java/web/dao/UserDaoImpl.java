@@ -3,12 +3,18 @@ package web.dao;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao{
-    @Override
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    /*@Override
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         users.add(new User("user1", "email1@mail.ru"));
@@ -16,5 +22,26 @@ public class UserDaoImpl implements UserDao{
         users.add(new User("user3", "email3@mail.ru"));
 
         return users;
+    }*/
+
+    public List<User> getUsers() {
+        TypedQuery<User> query = entityManager.createQuery("SELECT users FROM User users", User.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public void saveUser(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        User user = entityManager.find(User.class, id);
+        entityManager.remove(user);
     }
 }
