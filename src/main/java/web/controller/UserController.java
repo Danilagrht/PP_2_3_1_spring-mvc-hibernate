@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
-    public String users(Model model){
+    public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
