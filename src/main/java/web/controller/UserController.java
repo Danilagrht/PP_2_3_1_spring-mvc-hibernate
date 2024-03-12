@@ -33,7 +33,6 @@ public class UserController {
 
     @PostMapping(value = "/updateUser")
     public String updateUser(@ModelAttribute("user") User user) {
-        user.setId(user.getId());
         userService.updateUser(user);
         return "redirect:/";
     }
